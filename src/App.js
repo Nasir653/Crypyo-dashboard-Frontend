@@ -29,7 +29,7 @@ function App() {
   const fetchHistory = async (coinId) => {
     setHistoryData([]);
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/history/${coinId}`);
+      const { data } = await axios.get(`https://crypyo-dashboard-backend.onrender.com/api/history/${coinId}`);
       setHistoryData(data);
       setTimeout(() => {
         if (chartRef.current) {
@@ -42,14 +42,14 @@ function App() {
   };
 
   const fetchCoins = async () => {
-    const { data } = await axios.get('http://localhost:5000/api/coins');
+    const { data } = await axios.get('https://crypyo-dashboard-backend.onrender.com/api/coins');
     setCoins(data);
   };
 
   const saveHistory = async () => {
     setHistoryMsg('');
     try {
-      const res = await axios.post('http://localhost:5000/api/history');
+      const res = await axios.post('https://crypyo-dashboard-backend.onrender.com/api/history');
       setHistoryMsg(res.data.message || 'Snapshot saved!');
     } catch (err) {
       setHistoryMsg('Failed to save snapshot');
@@ -164,6 +164,8 @@ function App() {
             ))}
           </tbody>
         </table>
+
+        {console.log("History coins", historyData)}
         {selectedCoin && historyData.length > 0 && (
           <div ref={chartRef} style={{marginTop: 32, background: '#fff', borderRadius: 12, boxShadow: '0 2px 12px rgba(0,0,0,0.08)', padding: 24}}>
             <h2 style={{marginBottom: 16}}>{selectedCoin.name} Price History</h2>
