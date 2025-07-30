@@ -43,7 +43,7 @@ function App() {
 
   const fetchCoins = async () => {
     const { data } = await axios.get('https://crypyo-dashboard-backend.onrender.com/api/coins');
-    setCoins(data);
+    setCoins(data || []);
   };
 
   const saveHistory = async () => {
